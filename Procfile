@@ -1,0 +1,1 @@
+worker: node intersearch_bot.js

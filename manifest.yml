@@ -1,0 +1,6 @@
+---
+applications:
+- name: intersearch-slack
+  buildpack: https://github.com/cloudfoundry/nodejs-buildpack
+  memory: 512M
+  command: node src/intersearch_bot.js
