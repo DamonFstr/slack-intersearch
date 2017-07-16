@@ -6,28 +6,40 @@ require('../responders/search_responder.js');
 var id;
 var user;  
 var client = new Intercom.Client({ token: process.env.INTERCOM_PAT });
+var contactCount;
 
 
 makeSearchRequest = function (controller, bot, causeMessage, identifier, outputOption) {
-  console.log(identifier);
     if(outputOption == 'user'){
       user = client.users.find({
       email: identifier
       }, function (d) {
-      console.log(d.body);
-      id = d.body.id;
-      postResponse(controller, bot, causeMessage, formatSearch(id, outputOption));
+      if(d.body.type == 'error.list'){
+          postResponse(controller, bot, causeMessage, d.body.errors[0].message);
+      }
+      else{
+        id = d.body.id;
+        postResponse(controller, bot, causeMessage, formatSearch(id, outputOption));
+      }
       });
     }
     else if(outputOption=='lead'){
       user = client.leads.listBy({
       email: identifier
       }, function (d) {
-      id = d.body.contacts[0].id;
-      postResponse(controller, bot, causeMessage, formatSearch(id, outputOption));
+        contactCount = d.body.total_count;
+        if(contactCount > 0){
+        for(var i = 0;i<contactCount;i++){
+          id = d.body.contacts[i].id;
+          postResponse(controller, bot, causeMessage, formatSearch(id, outputOption));
+        }
+      }
+      else{
+          postResponse(controller, bot, causeMessage, "Leads not found");
+      }
       });
     }
     else{
-      postResponse(controller, bot, causeMessage, "I don't recognise that user");
+      postResponse(controller, bot, causeMessage, "I don't recognise that");
     }
 }
