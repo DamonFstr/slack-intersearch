@@ -38,9 +38,9 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
               postResponse(controller, bot, causeMessage, formatSearch(id, outputOption));
             }
           }
-      }
-      else{
-          postResponse(controller, bot, causeMessage, "Leads Not Found");
+          else {
+            postResponse(controller, bot, causeMessage, "Leads Not Found");
+          }
       }
       });
     }
