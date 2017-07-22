@@ -12,7 +12,7 @@ var contactCount;
 makeSearchRequest = function (controller, bot, causeMessage, identifier, outputOption) {
     switch(outputOption)
     {
-      case: 'userid':
+      case 'userid':
         user = client.users.find({
         user_id: identifier
         }, function (d) {
@@ -25,7 +25,7 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
           }
         });
 
-      case: 'useremail':
+      case 'useremail':
         user = client.users.find({
         email: identifier
         }, function (d) {
@@ -38,7 +38,7 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
         }
       });
 
-      case: 'leademail':
+      case 'leademail':
         user = client.leads.listBy({
         email: identifier
         }, function (d) {
