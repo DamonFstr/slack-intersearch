@@ -10,7 +10,7 @@ var contactCount;
 
 
 makeSearchRequest = function (controller, bot, causeMessage, identifier, outputOption) {
-    if(outputOption == 'user'){
+    if(outputOption == 'useremail'){
       user = client.users.find({
       email: identifier
       }, function (d) {
@@ -23,7 +23,7 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
       }
       });
     }
-    else if(outputOption=='lead'){
+    else if(outputOption=='leademail'){
       user = client.leads.listBy({
       email: identifier
       }, function (d) {
