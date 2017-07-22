@@ -61,6 +61,24 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
         }
         });
         break;
+
+        case 'username':
+          client.users.scroll.each({}, function(res) {
+          if (res.body.users.length>0){
+            for(i=0;i<res.body.users.length;i++){
+              if(res.body.users[i].name == identifier){
+                id = res.body.users[i].id;
+                postResponse(controller, bot, causeMessage, formatSearch(id));
+              }
+            }
+          }
+          else if(res.body.type == 'error.list'){
+            postResponse(controller, bot, causeMessage, res.body.errors.message[0]);
+          }
+          else{
+            postResponse(controller, bot, causeMessage, "User Not Found");
+          }
+          });
  
       default: 
         postResponse(controller, bot, causeMessage, "I don't recognise that");
