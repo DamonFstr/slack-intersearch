@@ -79,6 +79,7 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
             postResponse(controller, bot, causeMessage, "User Not Found");
           }
           });
+          break;
  
       default: 
         postResponse(controller, bot, causeMessage, "I don't recognise that");
