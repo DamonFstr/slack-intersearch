@@ -24,6 +24,7 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
             postResponse(controller, bot, causeMessage, formatSearch(id));
           }
         });
+        break;
 
       case: 'useremail':
         user = client.users.find({
@@ -37,6 +38,7 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
           postResponse(controller, bot, causeMessage, formatSearch(id));
         }
       });
+        break;
 
       case: 'leademail':
         user = client.leads.listBy({
@@ -58,8 +60,10 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
             }
         }
         });
+        break;
  
       default: 
         postResponse(controller, bot, causeMessage, "I don't recognise that");
+        break;
     }
 }
