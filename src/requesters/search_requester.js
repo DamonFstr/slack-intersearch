@@ -141,7 +141,7 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
             }
             if (res.body.contacts.length>0){
               console.log("Entering scroll with leads");
-              for(i=0;i<res.contacts.users.length;i++){
+              for(i=0;i<res.body.contacts.length;i++){
                 if(res.body.contacts[i].phone == identifier){
                   id = res.body.contacts[i].id;
                   console.log("Found lead that matched the name " + id);
