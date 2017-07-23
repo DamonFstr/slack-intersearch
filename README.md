@@ -41,10 +41,16 @@ I would suggest deploying the bot to something like Heroku however.
 
 After being invited into a slack channel, the bot can be interacted with the following commands:
 
-1. '@botname help' results in the bot responding with instructions on how to use it.
-2. '@botname uptime' results in the bot responding with how long it has been online.
-3. '@botname user [email_address]' results in the bot responding with a link to the user in Intercom.
-4. '@botname lead [email_address]' results in the bot responding with a link to the lead in Intercom.
+1. `@botname help` results in the bot responding with instructions on how to use it.
+2. `@botname uptime` results in the bot responding with how long it has been online.
+3. `@botname user [email_address]` results in the bot responding with a link to the user with that email address.
+4. `@botname lead [email_address]` results in the bot responding with a link to all leads with that email address.
+5. `@botname user [user_id]` results in the bot responding with a link to the user with that user_id.
+6. `@botname user -n [name]` results in the bot responding with all users with the name specified.
+7. `@botname lead -n [name]` results in the bot resonding with all leads with the name specified.
+8. `@botname user -p [phone number]` results in the bot responding with all users with the phone number specified.
+9. `@botname lead -p [phone number]` results in the bot responding with all leads with the phone number specified.
 
 ## Notes ##
-You can see all my todo stuff [here](https://github.com/DamonFstr/slack-intersearch/projects/1)
+* You can see all my todo stuff [here](https://github.com/DamonFstr/slack-intersearch/projects/1)
+* The search term is an exact match, so make sure to pass in the correct casing/formatting etc.
