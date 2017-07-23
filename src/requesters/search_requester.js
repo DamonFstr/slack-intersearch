@@ -32,6 +32,7 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
         }, function (d) {
         if(d.body.type == 'error.list'){
           postResponse(controller, bot, causeMessage, d.body.errors[0].message);
+          console.log("The Intercom API returned the following errors: " + d.body.errors[0]);
         }
         else{
           id = d.body.id;
@@ -46,6 +47,7 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
         }, function (d) {
           if(d.body.type == 'error.list'){
             postResponse(controller, bot, causeMessage, d.body.errors[0].message);
+            console.log("The Intercom API returned the following errors: " + d.body.errors[0]);
           }
           else{
             contactCount = d.body.total_count;
@@ -64,20 +66,23 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
 
         case 'username':
           client.users.scroll.each({}, function(res) {
-          if (res.body.users.length>0){
-            for(i=0;i<res.body.users.length;i++){
-              if(res.body.users[i].name == identifier){
-                id = res.body.users[i].id;
-                postResponse(controller, bot, causeMessage, formatSearch(id));
+            if(res.body.type == 'error.list'){
+              postResponse(controller, bot, causeMessage, res.body.errors.message[0]);
+            }
+            if (res.body.users.length>0){
+              console.log("Entering scroll with users");
+              for(i=0;i<res.body.users.length;i++){
+                if(res.body.users[i].name == identifier){
+                  id = res.body.users[i].id;
+                  console.log("Found user that matched the name" + id);
+                  postResponse(controller, bot, causeMessage, formatSearch(id));
+                }
+                else{
+                  postResponse(controller, bot, causeMessage, "User Not Found");
+                  console.log("Could not find user with identifier: " + identifier);
+                }
               }
             }
-          }
-          else if(res.body.type == 'error.list'){
-            postResponse(controller, bot, causeMessage, res.body.errors.message[0]);
-          }
-          else{
-            postResponse(controller, bot, causeMessage, "User Not Found");
-          }
           });
           break;
  
