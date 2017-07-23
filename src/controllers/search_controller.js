@@ -3,13 +3,7 @@ require('../requesters/search_requester.js');
 var identifier;
 
 setupSearchController = function (controller) {
-    controller.hears(['user (.*)'], 'direct_message,direct_mention,mention', function (bot, message) {
-        identifier = message.match[1];
-        console.log("Making search request with identifier: " + identifier);
-        makeSearchRequest(controller, bot, message, identifier, 'userid');
-    });
-
-    controller.hears(['user <mailto:([^\?]*)[|]([^\?]*)>'], 'direct_message,direct_mention,mention', function (bot, message){
+   controller.hears(['user <mailto:([^\?]*)[|]([^\?]*)>'], 'direct_message,direct_mention,mention', function (bot, message){
         identifier = message.match[1];
         console.log("Making search request with identifier: " + identifier);
         makeSearchRequest(controller, bot, message, identifier, 'useremail');
@@ -43,5 +37,11 @@ setupSearchController = function (controller) {
         identifier = message.match[1];
         console.log("Making search request with identifier: " + identifier);
         makeSearchRequest(controller, bot, message, identifier, 'leadphone')
+    });
+
+    controller.hears(['user (.*)'], 'direct_message,direct_mention,mention', function (bot, message) {
+        identifier = message.match[1];
+        console.log("Making search request with identifier: " + identifier);
+        makeSearchRequest(controller, bot, message, identifier, 'userid');
     });
 };
