@@ -25,22 +25,22 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
             postResponse(controller, bot, causeMessage, formatSearch(id));
           }
         });
-        break;
+      break;
 
       case 'useremail':
         user = client.users.find({
-        email: identifier
+          email: identifier
         }, function (d) {
-        if(d.body.type == 'error.list'){
-          postResponse(controller, bot, causeMessage, d.body.errors[0].message);
-          console.log("The Intercom API returned the following errors: " + d.body.errors[0]);
-        }
-        else{
-          id = d.body.id;
-          postResponse(controller, bot, causeMessage, formatSearch(id));
-        }
-      });
-        break;
+          if(d.body.type == 'error.list'){
+            postResponse(controller, bot, causeMessage, d.body.errors[0].message);
+            console.log("The Intercom API returned the following errors: " + d.body.errors[0]);
+         }
+          else{
+            id = d.body.id;
+            postResponse(controller, bot, causeMessage, formatSearch(id));
+          }
+        });
+      break;
 
       case 'leademail':
         user = client.leads.listBy({
@@ -63,7 +63,7 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
             }
         }
         });
-        break;
+      break;
 
         case 'username':
           client.users.scroll.each({}, function(res) {
@@ -83,10 +83,79 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
             }
             if (results < 1)
             {
-              postResponse(controller, bot, causeMessage, "User Not Found");
+              postResponse(controller, bot, causeMessage, "User(s) Not Found");
             }
           });
-          break;
+        break;
+
+        case 'leadname':
+          client.leads.scroll.each({}, function(res) {
+            if(res.body.type == 'error.list'){
+              postResponse(controller, bot, causeMessage, res.body.errors.message[0]);
+            }
+            if (res.body.users.length>0){
+              console.log("Entering scroll with leads");
+              for(i=0;i<res.body.users.length;i++){
+                if(res.body.users[i].name == identifier){
+                  id = res.body.users[i].id;
+                  console.log("Found lead that matched the name " + id);
+                  results++;
+                  postResponse(controller, bot, causeMessage, formatSearch(id));
+                }
+              }
+            }
+            if (results < 1)
+            {
+              postResponse(controller, bot, causeMessage, "Lead(s) Not Found");
+            }
+          });
+        break;
+
+        case 'userphone':
+          client.users.scroll.each({}, function(res) {
+            if(res.body.type == 'error.list'){
+              postResponse(controller, bot, causeMessage, res.body.errors.message[0]);
+            }
+            if (res.body.users.length>0){
+              console.log("Entering scroll with users");
+              for(i=0;i<res.body.users.length;i++){
+                if(res.body.users[i].phone == identifier){
+                  id = res.body.users[i].id;
+                  console.log("Found user that matched the name " + id);
+                  results++;
+                  postResponse(controller, bot, causeMessage, formatSearch(id));
+                }
+              }
+            }
+            if (results < 1)
+            {
+              postResponse(controller, bot, causeMessage, "User(s) Not Found");
+            }
+          });
+        break;
+
+        case 'leadphone':
+          client.leads.scroll.each({}, function(res) {
+            if(res.body.type == 'error.list'){
+              postResponse(controller, bot, causeMessage, res.body.errors.message[0]);
+            }
+            if (res.body.users.length>0){
+              console.log("Entering scroll with leads");
+              for(i=0;i<res.body.users.length;i++){
+                if(res.body.users[i].phone == identifier){
+                  id = res.body.users[i].id;
+                  console.log("Found lead that matched the name " + id);
+                  results++;
+                  postResponse(controller, bot, causeMessage, formatSearch(id));
+                }
+              }
+            }
+            if (results < 1)
+            {
+              postResponse(controller, bot, causeMessage, "Lead(s) Not Found");
+            }
+          });
+        break;
  
       default: 
         postResponse(controller, bot, causeMessage, "I don't recognise that");

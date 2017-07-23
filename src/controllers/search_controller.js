@@ -7,7 +7,7 @@ setupSearchController = function (controller) {
         console.log("Matching the following message: ");
         console.log(message);
         identifier = message.match[1];
-        console.log("Making search request with identifier: " + identifier);
+        console.log("Making search request with identifier: " + identifier.toString());
         makeSearchRequest(controller, bot, message, identifier, 'useremail');
     });
 
@@ -15,7 +15,7 @@ setupSearchController = function (controller) {
         console.log("Matching the following message: ");
         console.log(message);
         identifier = message.match[1];
-        console.log("Making search request with identifier: " + identifier);
+        console.log("Making search request with identifier: " + identifier.toString());
         makeSearchRequest(controller, bot, message, identifier, 'leademail');
     });
 
@@ -23,7 +23,7 @@ setupSearchController = function (controller) {
         console.log("Matching the following message: ");
         console.log(message);
         identifier = message.match[1];
-        console.log("Making search request with identifier: " + identifier);
+        console.log("Making search request with identifier: " + identifier.toString());
         makeSearchRequest(controller, bot, message, identifier, 'username');
     });
 
@@ -31,7 +31,7 @@ setupSearchController = function (controller) {
         console.log("Matching the following message: ");
         console.log(message);
         identifier = message.match[1];
-        console.log("Making search request with identifier: " + identifier);
+        console.log("Making search request with identifier: " + identifier.toString());
         makeSearchRequest(controller, bot, message, identifier, 'leadname');
     });
 
@@ -39,7 +39,7 @@ setupSearchController = function (controller) {
         console.log("Matching the following message: ");
         console.log(message);
         identifier = message.match[1];
-        console.log("Making search request with identifier: " + identifier);
+        console.log("Making search request with identifier: " + identifier.toString());
         makeSearchRequest(controller, bot, message, identifier, 'userphone');
     });
 
@@ -47,7 +47,7 @@ setupSearchController = function (controller) {
         console.log("Matching the following message: ");
         console.log(message);
         identifier = message.match[1];
-        console.log("Making search request with identifier: " + identifier);
+        console.log("Making search request with identifier: " + identifier.toString());
         makeSearchRequest(controller, bot, message, identifier, 'leadphone')
     });
 
@@ -55,7 +55,7 @@ setupSearchController = function (controller) {
         console.log("Matching the following message: ");
         console.log(message);
         identifier = message.match[1];
-        console.log("Making search request with identifier: " + identifier);
+        console.log("Making search request with identifier: " + identifier.toString());
         makeSearchRequest(controller, bot, message, identifier, 'userid');
     });
 };
