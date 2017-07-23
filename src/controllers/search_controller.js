@@ -27,7 +27,7 @@ setupSearchController = function (controller) {
         makeSearchRequest(controller, bot, message, identifier, 'username');
     });
 
-    controller.hears(['lead -n (.*)'], 'direct_message,direction_mention,mention', function (bot, message){
+    controller.hears(['lead -n (.*)'], 'direct_message,direct_mention,mention', function (bot, message){
         console.log("Matching the following message: ");
         console.log(message);
         identifier = message.match[1];

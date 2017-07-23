@@ -75,7 +75,7 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
               for(i=0;i<res.body.users.length;i++){
                 if(res.body.users[i].name == identifier){
                   id = res.body.users[i].id;
-                  console.log("Found user that matched the name " + id);
+                  console.log("Found user that matched the name " + identifier.toString());
                   results++;
                   postResponse(controller, bot, causeMessage, formatSearch(id));
                 }
@@ -98,7 +98,7 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
               for(i=0;i<res.body.contacts.length;i++){
                 if(res.body.contacts[i].name == identifier){
                   id = res.body.contacts[i].id;
-                  console.log("Found lead that matched the name " + id);
+                  console.log("Found lead that matched the name " + identifier.toString());
                   results++;
                   postResponse(controller, bot, causeMessage, formatSearch(id));
                 }
@@ -121,7 +121,7 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
               for(i=0;i<res.body.users.length;i++){
                 if(res.body.users[i].phone == identifier){
                   id = res.body.users[i].id;
-                  console.log("Found user that matched the name " + id);
+                  console.log("Found user that matched the number " + identifier.toString());
                   results++;
                   postResponse(controller, bot, causeMessage, formatSearch(id));
                 }
@@ -144,7 +144,7 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
               for(i=0;i<res.body.contacts.length;i++){
                 if(res.body.contacts[i].phone == identifier){
                   id = res.body.contacts[i].id;
-                  console.log("Found lead that matched the name " + id);
+                  console.log("Found lead that matched the number " + identifier.toString());
                   results++;
                   postResponse(controller, bot, causeMessage, formatSearch(id));
                 }
