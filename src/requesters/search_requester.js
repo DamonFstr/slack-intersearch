@@ -93,11 +93,11 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
             if(res.body.type == 'error.list'){
               postResponse(controller, bot, causeMessage, res.body.errors.message[0]);
             }
-            if (res.body.users.length>0){
+            if (res.body.contacts.length>0){
               console.log("Entering scroll with leads");
-              for(i=0;i<res.body.users.length;i++){
-                if(res.body.users[i].name == identifier){
-                  id = res.body.users[i].id;
+              for(i=0;i<res.body.contacts.length;i++){
+                if(res.body.contacts[i].name == identifier){
+                  id = res.body.contacts[i].id;
                   console.log("Found lead that matched the name " + id);
                   results++;
                   postResponse(controller, bot, causeMessage, formatSearch(id));
@@ -139,11 +139,11 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
             if(res.body.type == 'error.list'){
               postResponse(controller, bot, causeMessage, res.body.errors.message[0]);
             }
-            if (res.body.users.length>0){
+            if (res.body.contacts.length>0){
               console.log("Entering scroll with leads");
-              for(i=0;i<res.body.users.length;i++){
-                if(res.body.users[i].phone == identifier){
-                  id = res.body.users[i].id;
+              for(i=0;i<res.contacts.users.length;i++){
+                if(res.body.contacts[i].phone == identifier){
+                  id = res.body.contacts[i].id;
                   console.log("Found lead that matched the name " + id);
                   results++;
                   postResponse(controller, bot, causeMessage, formatSearch(id));
