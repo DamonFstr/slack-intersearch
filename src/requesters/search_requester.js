@@ -7,6 +7,7 @@ var id;
 var user;
 var client = new Intercom.Client({ token: process.env.INTERCOM_PAT });
 var contactCount;
+var results = 0;
 
 
 makeSearchRequest = function (controller, bot, causeMessage, identifier, outputOption) {
@@ -75,13 +76,14 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
                 if(res.body.users[i].name == identifier){
                   id = res.body.users[i].id;
                   console.log("Found user that matched the name " + id);
+                  results++;
                   postResponse(controller, bot, causeMessage, formatSearch(id));
                 }
-                else{
-                  postResponse(controller, bot, causeMessage, "User Not Found");
-                  console.log("Could not find user with identifier: " + identifier);
-                }
               }
+            }
+            if (results < 1)
+            {
+              postResponse(controller, bot, causeMessage, "User Not Found");
             }
           });
           break;
