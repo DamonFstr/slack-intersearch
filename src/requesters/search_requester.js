@@ -74,7 +74,7 @@ makeSearchRequest = function (controller, bot, causeMessage, identifier, outputO
               for(i=0;i<res.body.users.length;i++){
                 if(res.body.users[i].name == identifier){
                   id = res.body.users[i].id;
-                  console.log("Found user that matched the name" + id);
+                  console.log("Found user that matched the name " + id);
                   postResponse(controller, bot, causeMessage, formatSearch(id));
                 }
                 else{
